@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	
+<head>
+	<title>Jäsenlista</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+
+<div> 
+	<h1>Jäsenet</h1>
+</div>
+
+
+	<table class="table table-striped">
+	<tr>
+		<td> <b>Nimi</b> </td>
+		<td> <b>Sähköposti</b> </td>
+		<td> <b>Asuinpaikka</b></td>
+
+
+	</tr>
+	<tr th:each="jasen : ${jasenet}">
+		<td th:text="${jasen.etunimi} + ' ' + ${jasen.sukunimi}"/td>
+		<td th:text="${jasen.sposti}"/td>
+		<td th:text="${jasen.asuinpaikka}"/td>
+
+		<td> <a th:href="@{/poista/{id}(id=${jasen.id})}" class="btn btn-danger">Poista jäsen</a> </td>
+		<td> <a th:href="@{/muokkaa/{id}(id=${jasen.id})}">Muokkaa jäsenen tietoja</a> </td>
+		
+	
+	</tr>
+		
+	</table>
+	
+	<a href="/lomake" class="btn btn-success">Lisää jäsen</a>
+
+
+
+	
+	
+</body>
+
+</html>

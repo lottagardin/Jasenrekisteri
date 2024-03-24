@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>LOMAKE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div>
+<h1>JÄSENLOMAKE</h1>
+</div>
+
+<form th:action="@{/lisaaJasen}" th:object="${jasen}" method="post">
+  <label for="etunimi">Etunimi:</label>
+  <input type="text" id="etunimi" name = "etunimi"/><br/>
+  
+  <label for="sukunimi">Sukunimi:</label>
+  <input type="text" id="sukunimi" name = "sukunimi"/><br/>
+  
+  <label for="sposti">Sähköposti:</label>
+  <input type="text" id="sposti" name = "sposti"/><br/>
+  
+  <label for="asuinpaikka">Asuinpaikkakunta:</label>
+  <input type="text" id="asuinpaikka" name = "asuinpaikka"/><br/>
+  
+  <input type="submit" value="Rekisteröidy"/>
+</form>
+
+</body>
+</html>
