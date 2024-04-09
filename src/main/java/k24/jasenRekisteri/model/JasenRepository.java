@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface JasenRepository extends CrudRepository<Jasen, Long> {
 	List<Jasen> findBySukunimi(String sukunimi);
-	List<Jasen> findByAsuinpaikka(String asuinpaikka);
+	List<Jasen> findByAsuinpaikka(Asuinpaikka asuinpaikka);
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,9 +24,21 @@ private String sukunimi;
 @NotBlank
 @Email
 private String sposti;
-@NotBlank
-private String asuinpaikka;
 
+@NotBlank
+private String paikkanimi;
+
+@ManyToOne
+@JoinColumn(name ="asuinpaikkaid")
+private Asuinpaikka asuinpaikka;
+
+
+public String getPaikkanimi() {
+	return paikkanimi;
+}
+public void setPaikkanimi(String paikkanimi) {
+	this.paikkanimi = paikkanimi;
+}
 
 
 public Long getId() {
@@ -51,13 +65,15 @@ public String getSposti() {
 public void setSposti(String sposti) {
 	this.sposti = sposti;
 }
-public String getAsuinpaikka() {
+
+public Asuinpaikka getAsuinpaikka() {
 	return asuinpaikka;
 }
-public void setAsuinpaikka(String asuinpaikka) {
+public void setAsuinpaikka(Asuinpaikka asuinpaikka) {
 	this.asuinpaikka = asuinpaikka;
 }
-public Jasen(String etunimi, String sukunimi, String sposti, String asuinpaikka) {
+
+public Jasen(String etunimi, String sukunimi, String sposti, Asuinpaikka asuinpaikka) {
 	this.etunimi = etunimi;
 	this.sukunimi = sukunimi;
 	this.sposti = sposti;

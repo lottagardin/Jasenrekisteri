@@ -1,44 +1,23 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
 
-	
 <head>
-	<title>Asuinpaikkahaku</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<title>PAIKKAKUNTAHAKU</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-
-<div> 
-	<h1>Jäsenet asuinpaikan perusteella</h1>
+<div>
+<h1>HAE JÄSENIÄ PAIKKAKUNNAN PERUSTEELLA</h1>
 </div>
 
+<form th:action="@{/etsi/{paikkanimi}}" method="get">
+  <label for="paikkanimi">Paikkakunta</label>
+  <input type="text" id="paikkanimi" name = "paikkanimi"/><br/>
+  
+  <input type="submit" value="Etsi"/>
+</form>
 
-	<table class="table table-striped">
-	<tr>
-		<td> <b>Nimi</b> </td>
-		<td> <b>Sähköposti</b> </td>
-
-
-
-	</tr>
-	<tr th:each="jasen : ${jasenet}">
-		<td th:text="${jasen.etunimi} + ' ' + ${jasen.sukunimi}"/td>
-		<td th:text="${jasen.sposti}"/td>
-
-
-		
-	
-	</tr>
-		
-	</table>
-
-	<a href="/jasenlista">Takaisin jäsenlistaukseen</a>
-
-
-	
-	
 </body>
-
 </html>

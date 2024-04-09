@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+	<title>Muuta tietoja</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<div> 
+	<h1> Muuta jäsenen tietoja </h1>
+</div>
+
+
+	
+<form th:action="@{/tallennaMuutokset}" th:object="${jasen}" method="post">
+  <label for="etunimi">Etunimi:</label>
+  <input type="text" id="etunimi" name = "etunimi" th:value = "${jasen.etunimi}"/><br/>
+  
+  <label for="sukunimi">Sukunimi:</label>
+  <input type="text" id="sukunimi" name = "sukunimi" th:value = "${jasen.sukunimi}"/><br/>
+  
+  <label for="sposti">Sähköposti:</label>
+  <input type="text" id="sposti" name = "sposti" th:value = "${jasen.sposti}"/><br/>
+  
+  <label for="asuinpaikka">Asuinpaikkakunta:</label>
+  <input type="text" id="asuinpaikka" name = "asuinpaikka" th:value = "${jasen.asuinpaikka}"/><br/>
+  
+  <input type="hidden" th:field="*{id}" />
+ 
+  <input type="submit" value="Tallenna tiedot"/>
+</form>
+	
+	
+</body>
+
+</html>
