@@ -46,10 +46,6 @@ public String kirjaudu() {
 	return "kirjaudu";
 }
 
-@GetMapping("/asuinpaikkahaku")
-public String asuinpaikkahaku() {
-	return "asuinpaikkahaku";
-}
 	
 @GetMapping("/lomake")
 public String lomake(Model model) {
