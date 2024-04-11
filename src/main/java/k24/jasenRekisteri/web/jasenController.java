@@ -30,10 +30,20 @@ private JasenRepository jasenRepo;
 @Autowired
 private AsuinpaikkaRepository asuinpaikkaRepo;
 
+@GetMapping("/")
+public String tyhja() {
+	return "etusivu";
+}
+ 
 
 @GetMapping("/etusivu")
 public String etusivu() {
 	return "etusivu";
+}
+
+@GetMapping("/kirjaudu")
+public String kirjaudu() {
+	return "kirjaudu";
 }
 
 @GetMapping("/asuinpaikkahaku")
@@ -94,8 +104,13 @@ public String jasenlista(Model model) {
 public String tallennaMuutokset(@Valid Jasen jasen, BindingResult bindingResult) {
 	
 	if (bindingResult.hasErrors()) {
-		return "redirect:jasenlista";
+		return "virheita";
 	}
+	
+	long id = jasen.getId();
+	
+	Optional<Jasen> optJasen = jasenRepo.findById(id);
+	Jasen muokattuJasen = optJasen.get();
 	
 	String asuinpaikkanimi = jasen.getPaikkanimi();
 	Asuinpaikka olemassaolevapaikka = asuinpaikkaRepo.findByPaikkanimiIgnoreCase(asuinpaikkanimi);
@@ -104,39 +119,26 @@ public String tallennaMuutokset(@Valid Jasen jasen, BindingResult bindingResult)
 		Asuinpaikka uusipaikka = new Asuinpaikka ();
 		uusipaikka.setPaikkaNimi(asuinpaikkanimi);
 		asuinpaikkaRepo.save(uusipaikka);
+		muokattuJasen.setAsuinpaikka(uusipaikka);
+	} else {
+		muokattuJasen.setAsuinpaikka(olemassaolevapaikka);
 	}
 	
-	long id = jasen.getId();
-	
-	Optional<Jasen> optJasen = jasenRepo.findById(id);
-	Jasen muokattuJasen = optJasen.get();
 	
 	muokattuJasen.setEtunimi(jasen.getEtunimi());
 	muokattuJasen.setSukunimi(jasen.getSukunimi());
 	muokattuJasen.setSposti(jasen.getSposti());
-	muokattuJasen.setAsuinpaikka(jasen.getAsuinpaikka());
 
 	
 	jasenRepo.save(muokattuJasen);
 
-	return"redirect:jasenlista";
+	return"muokattu";
 }
 
 
-@GetMapping("/etsi/{paikkanimi}")
-public String etsiAsuinpaikalla(@PathVariable("paikkanimi") String paikkaNimi, Model model) {
-
-	Asuinpaikka asuinpaikka = asuinpaikkaRepo.findByPaikkanimiIgnoreCase(paikkaNimi);
-	
-	if (asuinpaikka== null) {
-		return ("eijasenia"); 
-	}
-	
-	Iterable<Jasen> jasenet = jasenRepo.findByAsuinpaikka(asuinpaikka);
-	model.addAttribute("jasenet", jasenet);
-
-	
-	return "paikkakuntajasenet";
-}
 
 }
+
+
+
+
